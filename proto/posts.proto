@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package auth;
+
+import "google/api/annotations.proto";
+
+service PostsService {
+	rpc GetPosts (GetPostsRequest) returns (GetPostsResponse) {
+	  option (google.api.http) = {
+		get: "/v1/posts/{userLogin}",
+	  };
+	}
+	rpc CreatePost (CreatePostRequest) returns (CreatePostResponse) {
+		option (google.api.http) = {
+			post: "/v1/posts/create",
+			body: "*" // В body весь CreatePostRequest
+		};
+	}
+	rpc DeletePost (DeletePostRequest) returns (DeletePostResponse) {
+		option (google.api.http) = {
+			delete: "/v1/posts/delete",
+			body: "*" // В body весь DeletePostRequest
+		};
+	}
+}
+
+message Post {
+	int32 id = 1;
+	string content = 2;
+}
+
+message GetPostsRequest {
+	string userLogin = 1;
+}
+message GetPostsResponse {
+	repeated Post posts = 1; 
+}
+
+message CreatePostRequest {
+	string content = 1;
+}
+message CreatePostResponse {
+	int32 id = 1;
+}
+
+message DeletePostRequest {
+	int32 id = 1;
+}
+
+message DeletePostResponse {
+	reserved "OK";
+}

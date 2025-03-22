@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 package auth;
-option go_package = "myproject/auth;auth";
 
 import "google/api/annotations.proto";
+
 
 service AuthService {
   rpc Login (LoginRequest) returns (LoginResponse) {
@@ -12,22 +12,20 @@ service AuthService {
       body: "*"
     };
   }
-  rpc ValidateToken (ValidateRequest) returns (ValidateResponse);
+  rpc Auth (AuthRequest) returns (AuthResponse);
 }
 
 message LoginRequest {
-  string username = 1;
+  string userLogin = 1;
 }
-
 message LoginResponse {
-  string access_token = 1;
+  string accessToken = 1;
 }
 
-message ValidateRequest {
-  string access_token = 1;
+message AuthRequest {
+  string accessToken = 1;
 }
-
-message ValidateResponse {
-  string username = 1;
+message AuthResponse {
+  string userLogin = 1;
   bool valid = 2;
 }
