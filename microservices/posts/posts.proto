@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-package auth;
+package posts;
 
 import "google/api/annotations.proto";
+
 
 service PostsService {
 	rpc GetPosts (GetPostsRequest) returns (GetPostsResponse) {
 	  option (google.api.http) = {
-		get: "/v1/posts/{userLogin}",
+		get: "/v1/posts/{userLogin}"
 	  };
 	}
 	rpc CreatePost (CreatePostRequest) returns (CreatePostResponse) {
@@ -27,6 +28,7 @@ service PostsService {
 message Post {
 	int32 id = 1;
 	string content = 2;
+	string userLogin = 3;
 }
 
 message GetPostsRequest {
