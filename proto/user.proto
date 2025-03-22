@@ -1,0 +1,7 @@
+service UserService {
+	rpc GetUser (GetUserRequest) returns (User) {
+	  option (google.api.http) = {
+		get: "/v1/users/{user_id}"  // REST-путь
+	  };
+	}
+}
