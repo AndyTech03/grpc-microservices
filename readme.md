@@ -1,2 +1,4 @@
-Перед первым запуском выполнить:
-- `docker-compose build protoc-base --no-cache --progress=plain`
+Очистка докера
+- `docker system prune -a -f --volumes`
+- `docker builder prune -a -f`
+- `docker buildx prune -a -f`
