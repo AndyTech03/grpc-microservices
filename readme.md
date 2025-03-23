@@ -1,13 +1,25 @@
-Скачиваем googleapis глобально
+**ВАЖНО!!** выполнять команды в cmd, тк PowerShell требует права админа для работы с переменными окружения.
+
+Проверь GOPATH:
+`echo %GOPATH%`
+
+Если пусто или вывелось `%GOPATH%`:
+`setx GOPATH "%USERPROFILE%\go"` 
+`setx PATH "%PATH%;%GOPATH%\bin"`и перезапусти VS Code
+
+Скачиваем googleapis глобально:
 `git clone https://fuchsia.googlesource.com/third_party/googleapis %GOPATH%/src/googleapis`
 
-Скачиваем protoc версии 29.0
+Скачиваем protoc версии 29.0:
 `https://github.com/protocolbuffers/protobuf/releases/download/v29.0/protoc-29.0-win64.zip`
 
-Скачиваем плагины
+Скачиваем плагины:
 `go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger@latest`
 `go install google.golang.org/protobuf/cmd/protoc-gen-go@latest`
 `go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest`
+
+Скачиваем либы на питон:
+`pip install -r requirements.txt`
 
 ## Сборка
 Генерируем gRpc и Swagger для всех .proto файлов
@@ -15,7 +27,6 @@
 
 Собираем Compose (весь)
 `docker-compose build`
-
 
 Собираем Compose (по сервисам)
 `docker-compose build auth-service`

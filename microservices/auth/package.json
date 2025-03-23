@@ -1,0 +1,21 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate:grpc": "grpc_tools_node_protoc -I. -I%GOPATH%\\src\\googleapis --plugin=protoc-gen-ts_proto=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=./src/generated --ts_proto_opt=outputServices=grpc-js,returnObservable=false,nestJs=true,fileSuffix=.pb --proto_path=. src/proto/*.proto"
+
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.1",
+    "@nestjs/microservices": "^11.0.12"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.13.0",
+    "ts-proto": "^2.6.1"
+  }
+}
