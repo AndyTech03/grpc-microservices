@@ -1,11 +1,21 @@
 services:
+  protoc-base:
+    build:
+      context: ./images/protoc-base
+    image: protoc-base:0.0.1
+    # Не нужно открывать порты, это только базовый образ
+
   auth-service:
     build: ./microservices/auth
     container_name: auth-service
     ports:
-      - "50051:50051"
+    #  - "50051:50051"
+      - 8080:8080
     networks:
       - microservices-net
+    depends_on:
+      - protoc-base
+    command: ["python", "-m", "http.server"]
 
   posts-service:
     build: ./microservices/posts
@@ -14,6 +24,8 @@ services:
       - "50052:50052"
     networks:
       - microservices-net
+    depends_on:
+      - protoc-base
 
   users-service:
     build: ./microservices/users
@@ -22,6 +34,8 @@ services:
       - "50053:50053"
     networks:
       - microservices-net
+    depends_on:
+      - protoc-base
 
   envoy:
     image: envoyproxy/envoy:v1.29-latest
